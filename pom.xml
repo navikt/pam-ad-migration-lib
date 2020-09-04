@@ -223,4 +223,11 @@
         </repository>
     </repositories>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/navikt/pam-ad-migration-lib</url>
+        </repository>
+    </distributionManagement>
+
 </project>
