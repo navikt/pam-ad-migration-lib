@@ -1,0 +1,181 @@
+{
+  "content": [
+    {
+      "id": 23518,
+      "uuid": "d8180776-4e1e-4ede-ba4d-ff98f596c145",
+      "created": "2018-05-23T21:35:36.524",
+      "createdBy": "pam-ad",
+      "updated": "2020-08-05T07:07:59.296417",
+      "updatedBy": "pam-ad",
+      "mediaList": [],
+      "contactList": [
+        {
+          "id": 4918731,
+          "name": "Bjørn",
+          "email": "bjorn",
+          "phone": "+12 234 56 789",
+          "role": null,
+          "title": "Personalsjef"
+        },
+        {
+          "id": 4918732,
+          "name": "Vidar",
+          "email": "vidar",
+          "phone": "+12 345 67 890",
+          "role": null,
+          "title": "Daglig Leder"
+        }
+      ],
+      "location": {
+        "address": "Borgeskogen 15",
+        "postalCode": "3160",
+        "county": "VESTFOLD OG TELEMARK",
+        "municipal": "SANDEFJORD",
+        "municipalCode": "3804",
+        "city": "STOKKE",
+        "country": "NORGE",
+        "latitude": "59.241641998291016",
+        "longitude": "10.256229400634766"
+      },
+      "locationList": [
+        {
+          "address": "Borgeskogen 15",
+          "postalCode": "3160",
+          "county": "VESTFOLD OG TELEMARK",
+          "municipal": "SANDEFJORD",
+          "municipalCode": "3804",
+          "city": "STOKKE",
+          "country": "NORGE",
+          "latitude": "59.241641998291016",
+          "longitude": "10.256229400634766"
+        }
+      ],
+      "properties": {
+        "extent": "Heltid",
+        "employerhomepage": "http://www.test.no",
+        "address": "Borgeskogen 15,3160 Stokke",
+        "occupation": "Håndverker",
+        "applicationdue": "Snarest",
+        "keywords": "elektriker",
+        "positioncount": "10",
+        "author": "Privat",
+        "engagementtype": "Fast",
+        "classification_styrk08_score": "0.85593283",
+        "industry": "Bygg og anlegg;Olje og gass",
+        "starttime": "01.06.2020",
+        "employerdescription": "<p>Langset Energy AS er et elektroselskap etablert i Stokke i Sandefjord kommune. Selskapet opererer innenfor områdene olje/gass, bygg/anlegg, industri og samferdsel</p>\n",
+        "adtext": "<p>Elektro/automasjonsinstallasjoner innenfor våre virksomhetsområder.</p>\n<p>Fagbrev/DSB godkjenning må dokumenteres.</p>\n<p>Førerkort kl. B kreves.</p>\n<p>Lønn ihht. LOK for elektrikere og ihht bedriftens fastlønnsavtale.</p>\n<p>Søkere med bosted utenfor Norge vil ikke bli vurdert.</p>\n",
+        "externalref": "93942417",
+        "sourceurl": "https://www.finn.no/93942417",
+        "sourceupdated": "2020-08-04T08:50:00.000Z",
+        "searchtags": "[{\"label\":\"Automatiker\",\"score\":0.84522945},{\"label\":\"Cable Railway Rigger\",\"score\":0.47990188},{\"label\":\"Physics Laboratory Technician\",\"score\":0.4784751},{\"label\":\"Automasjonsingeniør, sivil\",\"score\":0.4784751},{\"label\":\"Elektriker\",\"score\":0.3893732}]",
+        "applicationurl": "https://www.finn.no/recruitment/hired/frontend/applynow/input.action?adId=93942417",
+        "employer": "Langset Energy AS",
+        "location": "Stokke",
+        "classification_input_source": "jobtitle",
+        "sector": "Privat"
+      },
+      "title": "Vi søker personell med bosted i Norge for reisevirksomhet og lokale oppdrag",
+      "status": "ACTIVE",
+      "privacy": "SHOW_ALL",
+      "source": "FINN",
+      "medium": "FINN",
+      "reference": "93942417",
+      "published": "2020-08-05T07:03:19.616037",
+      "expires": "2020-09-15T08:50:00",
+      "employer": {
+        "id": 22970,
+        "uuid": "13e81dad-1526-4bc5-9724-ebeb2bc288c2",
+        "created": "2018-05-23T21:20:03.489",
+        "createdBy": "pam-ad",
+        "updated": "2020-08-05T07:04:13.239288",
+        "updatedBy": "pam-ad",
+        "mediaList": [],
+        "contactList": [],
+        "location": {
+          "address": "Borgeskogen 15",
+          "postalCode": "3160",
+          "county": "VESTFOLD OG TELEMARK",
+          "municipal": "SANDEFJORD",
+          "municipalCode": "3804",
+          "city": "STOKKE",
+          "country": "NORGE",
+          "latitude": "59.24165152290448",
+          "longitude": "10.256242672430153"
+        },
+        "locationList": [
+          {
+            "address": "Borgeskogen 15",
+            "postalCode": "3160",
+            "county": "VESTFOLD OG TELEMARK",
+            "municipal": "SANDEFJORD",
+            "municipalCode": "3804",
+            "city": "STOKKE",
+            "country": "NORGE",
+            "latitude": "59.24165152290448",
+            "longitude": "10.256242672430153"
+          }
+        ],
+        "properties": {
+          "nace2": "[{\"code\":\"43.210\",\"name\":\"Elektrisk installasjonsarbeid\"}]"
+        },
+        "name": "LANGSET ENERGY AS",
+        "orgnr": "994676245",
+        "status": "ACTIVE",
+        "parentOrgnr": "994639919",
+        "publicName": "LANGSET ENERGY AS",
+        "deactivated": null,
+        "orgform": "BEDR",
+        "employees": 73
+      },
+      "categoryList": [
+        {
+          "id": 4664,
+          "code": "7412.01",
+          "categoryType": "STYRK08NAV",
+          "name": "Automatiker",
+          "description": null,
+          "parentId": 4663
+        }
+      ],
+      "administration": {
+        "id": 1126344,
+        "status": "DONE",
+        "comments": null,
+        "reportee": "System",
+        "remarks": [],
+        "navIdent": null
+      },
+      "publishedByAdmin": null,
+      "businessName": "Langset Energy AS",
+      "firstPublished": false,
+      "deactivatedByExpiry": false,
+      "activationOnPublishingDate": false
+    }
+  ],
+  "pageable": {
+    "sort": {
+      "sorted": false,
+      "unsorted": true,
+      "empty": true
+    },
+    "offset": 0,
+    "pageNumber": 0,
+    "pageSize": 100,
+    "unpaged": false,
+    "paged": true
+  },
+  "totalPages": 107,
+  "totalElements": 10624,
+  "last": false,
+  "number": 0,
+  "sort": {
+    "sorted": false,
+    "unsorted": true,
+    "empty": true
+  },
+  "size": 1,
+  "first": true,
+  "numberOfElements": 100,
+  "empty": false
+}

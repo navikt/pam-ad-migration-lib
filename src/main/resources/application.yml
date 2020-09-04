@@ -1,0 +1,31 @@
+application:
+  version: @project.version@
+spring:
+  datasource:
+    url: ${DB_JDBC_URL:jdbc:h2:mem:testdb;Mode=PostgreSQL}
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:''}
+    platform: postgresql
+    hikari:
+      maximum-pool-size: 2
+      minimum-idle: 1
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+    properties:
+      hibernate:
+        generate_statistics: true
+        cache:
+          use_second_level_cache: true
+          use_query_cache: true
+          region:
+            factory_class:  org.hibernate.cache.ehcache.EhCacheRegionFactory
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: none
+  flyway:
+    enabled: false
+ad:
+  url: ${PAM_AD_URL:http://localhost:9001/api/v1/ads}
+feed:
+  pagesize: 1000
