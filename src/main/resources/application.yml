@@ -26,6 +26,6 @@ spring:
   flyway:
     enabled: false
 ad:
-  url: ${PAM_AD_URL:http://localhost:9001/api/v1/ads}
+  url: ${MIGRATION_AD_URL:http://localhost:9001/api/v1/ads}
 feed:
   pagesize: 1000
