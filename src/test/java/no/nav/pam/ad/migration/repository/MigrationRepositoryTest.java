@@ -3,6 +3,7 @@ package no.nav.pam.ad.migration.repository;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import no.nav.pam.ad.migration.dto.AdDTO;
+import no.nav.pam.ad.migration.dto.CategoryDTO;
 import no.nav.pam.ad.migration.entity.Ad;
 import no.nav.pam.ad.migration.entity.Category;
 import no.nav.pam.ad.migration.entity.Company;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,7 +30,7 @@ import java.util.stream.Collectors;
 public class MigrationRepositoryTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(MigrationRepositoryTest.class);
-    
+
     @Autowired
     private AdRepository adRepository;
 
@@ -36,11 +38,21 @@ public class MigrationRepositoryTest {
     private CompanyRepository companyRepository;
 
     @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Autowired
     private ObjectMapper objectMapper;
 
 
     @Test
     public void insertUpdateAdMigration()  throws Exception {
+
+        // fetch categories
+        JavaType listCategory = objectMapper.getTypeFactory().constructCollectionLikeType(List.class, CategoryDTO.class);
+        List<CategoryDTO> categoriesDTO = objectMapper.readValue(MigrationRepositoryTest.class.getResourceAsStream("/categories.json"), listCategory);
+        categoriesDTO.sort(Comparator.comparing(CategoryDTO::getId));
+        List<Category> allCategories = categoriesDTO.stream().map(CategoryMapper::fromDTO).collect(Collectors.toList());
+        categoryRepository.saveAll(allCategories);
         JavaType javaType = objectMapper.getTypeFactory().constructParametricType(FeedTransport.class, new Class[]{AdDTO.class});
         FeedTransport<AdDTO> transport = objectMapper.readValue(MigrationRepositoryTest.class.getResourceAsStream("/ad-feed.json"), javaType);
         List<AdDTO> adDTOs = transport.content;

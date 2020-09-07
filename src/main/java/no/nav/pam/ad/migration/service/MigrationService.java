@@ -1,7 +1,10 @@
 package no.nav.pam.ad.migration.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import no.nav.pam.ad.migration.dto.AdDTO;
+import no.nav.pam.ad.migration.dto.CategoryDTO;
 import no.nav.pam.ad.migration.entity.Ad;
 import no.nav.pam.ad.migration.entity.Category;
 import no.nav.pam.ad.migration.entity.Company;
@@ -9,6 +12,7 @@ import no.nav.pam.ad.migration.mapper.AdMapper;
 import no.nav.pam.ad.migration.mapper.CategoryMapper;
 import no.nav.pam.ad.migration.mapper.CompanyMapper;
 import no.nav.pam.ad.migration.repository.AdRepository;
+import no.nav.pam.ad.migration.repository.CategoryRepository;
 import no.nav.pam.ad.migration.repository.CompanyRepository;
 import no.nav.pam.feed.client.FeedConnector;
 import no.nav.pam.feed.taskscheduler.FeedTaskService;
@@ -34,28 +38,33 @@ public class MigrationService {
     private final FeedConnector feedConnector;
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
+    private final String categoriesUrl;
     private final CompanyRepository companyRepository;
     private final AdRepository adRepository;
+    private final CategoryRepository categoryRepository;
     private final String adUrl;
     private final String TASK_NAME = "migrate_ads_from_feed";
 
     @Autowired
     public MigrationService(FeedConnector feedConnector, FeedTaskService feedTaskService,
                             RestTemplate restTemplate, ObjectMapper objectMapper, CompanyRepository companyRepository,
-                            AdRepository adRepository,  @Value("${ad.url}") String adUrl) {
+                            AdRepository adRepository, CategoryRepository categoryRepository,  @Value("${migrate.url}") String migrateUrl) {
         this.feedConnector = feedConnector;
         this.feedTaskService = feedTaskService;
         this.restTemplate = restTemplate;
         this.objectMapper = objectMapper;
-        this.adUrl = adUrl;
+        this.adUrl = migrateUrl+"/ads";
+        this.categoriesUrl = migrateUrl+"/categories";
         this.companyRepository = companyRepository;
         this.adRepository = adRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     public void migrateFromFeed(LocalDateTime start) throws Exception {
         Long currentTime = System.currentTimeMillis();
         Integer adsCount = 0;
         LocalDateTime startTime = start;
+        mapSaveCategories();
         if (start == null) {
             startTime = feedTaskService.fetchLastRunDateForJob(TASK_NAME).orElse(LocalDateTime.now().minusYears(10));
         }
@@ -78,6 +87,16 @@ public class MigrationService {
         }
         LOG.info("Migrated {} ads ", adsCount);
         LOG.info("Time it took to finished: {}s", (System.currentTimeMillis()-currentTime)/1000);
+    }
+
+    private void mapSaveCategories() throws JsonProcessingException {
+        LOG.info("fetching categories");
+        JavaType listCategory = objectMapper.getTypeFactory().constructCollectionLikeType(List.class, CategoryDTO.class);
+        List<CategoryDTO> categoryDTOS = objectMapper.readValue(categoriesUrl, listCategory);
+        categoryDTOS.sort(Comparator.comparing(CategoryDTO::getId));
+        List<Category> allCategories = categoryDTOS.stream().map(CategoryMapper::fromDTO).collect(Collectors.toList());
+        categoryRepository.saveAll(allCategories);
+        LOG.info("All categories updated");
     }
 
     public void mapSaveAll( List<AdDTO> adDTOs) throws Exception {

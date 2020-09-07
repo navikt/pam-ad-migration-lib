@@ -7,11 +7,9 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "CATEGORY")
-@SequenceGenerator(name = "CATEGORY_SEQ", sequenceName = "CATEGORY_SEQ", allocationSize = 1)
 public class Category {
 
     @Id
-    @GeneratedValue(generator = "CATEGORY_SEQ")
     private Long id;
 
     @NotNull
