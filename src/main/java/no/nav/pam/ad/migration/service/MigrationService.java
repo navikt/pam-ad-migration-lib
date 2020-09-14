@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpMethod;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -89,10 +90,11 @@ public class MigrationService {
         LOG.info("Time it took to finished: {}s", (System.currentTimeMillis()-currentTime)/1000);
     }
 
-    private void mapSaveCategories() throws JsonProcessingException {
+    public void mapSaveCategories() throws JsonProcessingException {
         LOG.info("fetching categories");
+        String catString = restTemplate.getForObject(categoriesUrl, String.class);
         JavaType listCategory = objectMapper.getTypeFactory().constructCollectionLikeType(List.class, CategoryDTO.class);
-        List<CategoryDTO> categoryDTOS = objectMapper.readValue(categoriesUrl, listCategory);
+        List<CategoryDTO> categoryDTOS = objectMapper.readValue(catString, listCategory);
         categoryDTOS.sort(Comparator.comparing(CategoryDTO::getId));
         List<Category> allCategories = categoryDTOS.stream().map(CategoryMapper::fromDTO).collect(Collectors.toList());
         categoryRepository.saveAll(allCategories);
