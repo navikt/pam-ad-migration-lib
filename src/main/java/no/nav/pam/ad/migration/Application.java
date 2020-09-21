@@ -21,7 +21,7 @@ public class Application implements CommandLineRunner {
 
     public static void main(String[] args) {
         LOG.info("Starting pam-ad-migration");
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(Application.class, args).close();
         LOG.info("Finished");
     }
 
