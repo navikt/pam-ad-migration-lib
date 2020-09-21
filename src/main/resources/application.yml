@@ -31,4 +31,4 @@ spring:
 migrate:
   url: ${MIGRATION_URL:http://localhost:9001/api/v1}
 feed:
-  pagesize: 1000
+  pagesize: 100
