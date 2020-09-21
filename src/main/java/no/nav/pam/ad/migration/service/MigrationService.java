@@ -102,15 +102,18 @@ public class MigrationService {
     }
 
     public void mapSaveAll( List<AdDTO> adDTOs) throws Exception {
+        LOG.info("Saving {} items", adDTOs.size());
         List<Ad> ads = adDTOs.stream().map(ad -> {
             Company company = null;
             List<Category> categories = ad.getCategoryList().stream().map(CategoryMapper::fromDTO).collect(Collectors.toList());
             if (ad.getEmployer() != null ) {
                 if (companyRepository.existsById(ad.getEmployer().getId())) {
                     company = new Company();
+                    LOG.info("found old company");
                     company.setId(ad.getEmployer().getId());
                 } else {
                     company = CompanyMapper.fromDTO(ad.getEmployer());
+                    LOG.info("saving new company");
                     companyRepository.save(company);
                 }
             }
@@ -118,4 +121,5 @@ public class MigrationService {
         }).collect(Collectors.toList());
         adRepository.saveAll(ads);
     }
+
 }
