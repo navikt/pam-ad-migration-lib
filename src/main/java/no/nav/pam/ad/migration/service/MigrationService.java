@@ -109,11 +109,9 @@ public class MigrationService {
             if (ad.getEmployer() != null ) {
                 if (companyRepository.existsById(ad.getEmployer().getId())) {
                     company = new Company();
-                    LOG.info("found old company");
                     company.setId(ad.getEmployer().getId());
                 } else {
                     company = CompanyMapper.fromDTO(ad.getEmployer());
-                    LOG.info("saving new company");
                     companyRepository.save(company);
                 }
             }
