@@ -5,7 +5,7 @@
 
     <groupId>no.nav.pam.ad.migration</groupId>
     <artifactId>pam-ad-migration-lib</artifactId>
-    <version>0.9-SNAPSHOT</version>
+    <version>0.9</version>
     <packaging>jar</packaging>
 
     <parent>
