@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AdministrationDTO extends IdentificationDTO {
+public class AdministrationDTO {
 
     private String status;
     private String comments;

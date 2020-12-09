@@ -1,5 +1,8 @@
 package no.nav.pam.ad.migration.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class LocationDTO {
 
     private String address;

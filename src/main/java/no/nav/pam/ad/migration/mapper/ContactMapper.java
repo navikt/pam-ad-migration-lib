@@ -14,7 +14,6 @@ class ContactMapper {
 
         List<ContactDTO> mapped = entity.getContactListImmutable().stream()
                 .map(contact -> new ContactDTO()
-                        .setId(contact.getId())
                         .setName(contact.getName())
                         .setEmail(contact.getEmail())
                         .setPhone(contact.getPhone())

@@ -1,8 +1,11 @@
 package no.nav.pam.ad.migration.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CompanyDTO extends PAMEntityDTO {
 
     @NotNull

@@ -91,6 +91,7 @@ public class MigrationRepositoryTest {
             return AdMapper.fromDTO(ad, company, categories);
         }).collect(Collectors.toList());
         adRepository.saveAll(ads);
+        List<Ad> all = adRepository.findAll();
         Assert.assertEquals(companySize, companyRepository.findAll().size());
         Assert.assertEquals(adSize, adRepository.findAll().size());
 

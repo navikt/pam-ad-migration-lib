@@ -1,5 +1,7 @@
 package no.nav.pam.ad.migration.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -7,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class PAMEntityDTO extends IdentificationDTO {
 
     private String uuid;

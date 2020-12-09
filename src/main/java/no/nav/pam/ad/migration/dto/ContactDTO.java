@@ -1,11 +1,13 @@
 package no.nav.pam.ad.migration.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Objects;
 import java.util.stream.Stream;
 
-public class ContactDTO extends IdentificationDTO {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ContactDTO  {
 
     private String name;
     private String email;
@@ -61,10 +63,6 @@ public class ContactDTO extends IdentificationDTO {
         return this;
     }
 
-    @Override
-    public ContactDTO setId(Long id) {
-        return (ContactDTO) super.setId(id);
-    }
 
     /**
      * Check if this instance has only {@code null} fields.

@@ -272,55 +272,6 @@ public class Ad extends PAMEntity {
         return (Ad) super.addContact(name, email, phone, role, title);
     }
 
-    public Ad merge(Ad inDb) {
-        Ad merged = (Ad) super.merge(inDb);
-
-        // Preserve category and derived properties if incoming ad entity is missing this data
-        if (merged.getCategoryList().isEmpty()) {
-            merged.getCategoryList().addAll(inDb.getCategoryList());
-            mergeProperty(merged, inDb, PropertyNames.searchtags);
-            mergeProperty(merged, inDb, PropertyNames.classification_input_source);
-            mergeProperty(merged, inDb, PropertyNames.classification_styrk08_score);
-        }
-
-        applyAdministrativeMergePolicy(merged, inDb);
-
-        return merged;
-    }
-
-    private void applyAdministrativeMergePolicy(Ad merged, Ad inDb) {
-        // Date of first publishing by administrative app can never be changed once set
-        if (inDb.getPublishedByAdmin() != null) {
-            merged.setPublishedByAdmin(inDb.getPublishedByAdmin());
-        }
-
-        if (!updateToSameOrDefaultApplicationDomain(merged, inDb)) {
-            // Update crossing administrative app domain, keep existing administrative data unchanged
-
-            merged.setUpdatedBy(inDb.getUpdatedBy());
-            if (!inDb.getLocationListImmutable().isEmpty()) {
-                merged.buildLocations(Location.Builder.copyOf(inDb.getLocationListImmutable()));
-            }
-
-            inDb.getAdministration().ifPresent(a ->
-                    merged.buildAdministration(new Administration.Builder(a)));
-
-            inDb.getEmployer().ifPresent(merged::setEmployer);
-            preserveInternalProperties(merged, inDb);
-
-            // Stop status is allowed to be updated, regardless of administrative domain
-            if (merged.status != AdStatus.STOPPED) {
-                merged.status = inDb.getStatus();
-            }
-            // We have to keep pam-ad published.
-            merged.setPublished(inDb.getPublished());
-        } else {
-            // "Untouched", administrated externally, or update from the same administrative domain, allow any changes except Administration
-            //TODO: getAdministration should never be null
-            inDb.getAdministration().ifPresent(a ->
-                    merged.buildAdministration(new Administration.Builder(merged.getAdministration().get()).id(a.getId())));
-        }
-    }
 
     private void preserveInternalProperties(Ad merged, Ad inDb) {
         inDb.getPropertiesImmutable().keySet().stream()

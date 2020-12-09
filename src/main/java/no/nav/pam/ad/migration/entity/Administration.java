@@ -40,9 +40,8 @@ public class Administration {
     public Administration() {
     }
 
-    public Administration(Long id, AdministrationStatus status, String comments, String reportee, List<RemarkType> remarks,
+    public Administration(AdministrationStatus status, String comments, String reportee, List<RemarkType> remarks,
                           PAMEntity pamEntity, String navIdent) {
-        this.id = id;
         this.status = status;
         this.comments = comments;
         this.reportee = reportee;
@@ -51,10 +50,6 @@ public class Administration {
         // backward compatible just incase
         this.officerName = reportee;
         this.navIdent = navIdent;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public AdministrationStatus getStatus() {
@@ -83,7 +78,6 @@ public class Administration {
         private String reportee;
         private List<RemarkType> remarks = new ArrayList<>();
         private PAMEntity pamEntity;
-        private Long id;
         private String navIdent;
 
         public Builder() {
@@ -91,7 +85,6 @@ public class Administration {
         }
 
         public Builder(Administration a) {
-            this.id = a.id;
             this.status = a.status;
             this.comments = a.comments;
             this.reportee = a.reportee;
@@ -119,18 +112,13 @@ public class Administration {
             return this;
         }
 
-        public Builder id(Long id) {
-            this.id = id;
-            return this;
-        }
-
         public Builder navIdent(String navIdent) {
             this.navIdent = navIdent;
             return this;
         }
 
         public Administration build(PAMEntity pamEntity) {
-            return new Administration(id, status,comments, reportee,remarks,pamEntity,navIdent);
+            return new Administration(status,comments, reportee,remarks,pamEntity,navIdent);
         }
 
     }

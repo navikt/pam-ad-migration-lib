@@ -17,7 +17,6 @@ class AdministrationMapper {
             return null;
         }
         AdministrationDTO administrationDTO = new AdministrationDTO();
-        administrationDTO.setId(source.getId());
         administrationDTO.setStatus(source.getStatus().name());
         administrationDTO.setComments(source.getComments());
         administrationDTO.setReportee(source.getReportee());
@@ -32,7 +31,6 @@ class AdministrationMapper {
         builder.remarks(source.getRemarks().stream().map(RemarkType::findName).collect(Collectors.toList()));
         builder.status(AdministrationStatus.findName(source.getStatus()));
         builder.reportee(source.getReportee());
-        builder.id(source.getId());
         builder.navIdent(source.getNavIdent());
         return builder;
     }

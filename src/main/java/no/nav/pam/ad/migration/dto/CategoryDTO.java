@@ -1,10 +1,13 @@
 package no.nav.pam.ad.migration.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CategoryDTO extends IdentificationDTO implements Serializable {
 
     @NotEmpty
